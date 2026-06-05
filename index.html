@@ -59,47 +59,63 @@
     <script>
         function validateForm() {
 
-            let username = document.getElementById("username").value;
-            let password = document.getElementById("password").value;
-            let confirmPassword = document.getElementById("confirmPassword").value;
-            let email = document.getElementById("email").value;
-            let dob = document.getElementById("dob").value;
+    let username = document.getElementById("username").value;
+    let password = document.getElementById("password").value;
+    let confirmPassword = document.getElementById("confirmPassword").value;
+    let email = document.getElementById("email").value;
+    let dob = document.getElementById("dob").value;
 
-            let message = document.getElementById("message");
+    let message = document.getElementById("message");
 
-            // Check if fields are empty
-            if (username == "" || password == "" || confirmPassword == "" || email == "" || dob == "") {
-                message.innerHTML = "Please fill in all fields.";
-                message.style.color = "red";
-                return false;
-            }
+    // Check empty fields
+    if (username == "" || password == "" || confirmPassword == "" || email == "" || dob == "") {
+        message.innerHTML = "Please fill in all fields.";
+        message.style.color = "red";
+        return false;
+    }
 
-            // Password length validation
-            if (password.length < 8) {
-                message.innerHTML = "Password must contain at least 8 characters.";
-                message.style.color = "red";
-                return false;
-            }
+    // Username validation (minimum 10 characters)
+    if (username.length < 10) {
+        message.innerHTML = "Username must be at least 10 characters long.";
+        message.style.color = "red";
+        return false;
+    }
 
-            // Password match validation
-            if (password !== confirmPassword) {
-                message.innerHTML = "Passwords do not match.";
-                message.style.color = "red";
-                return false;
-            }
+    // Password length check
+    if (password.length < 8) {
+        message.innerHTML = "Password must be at least 8 characters long.";
+        message.style.color = "red";
+        return false;
+    }
 
-            // Email format validation
-            if (!email.includes("@")) {
-                message.innerHTML = "Please enter a valid email address.";
-                message.style.color = "red";
-                return false;
-            }
+    // Password special character validation (regex)
+    let specialCharPattern = /[!@#$%^&*(),.?":{}|<>]/;
 
-            message.innerHTML = "Registration successful!";
-            message.style.color = "green";
+    if (!specialCharPattern.test(password)) {
+        message.innerHTML = "Password must include at least 1 special character.";
+        message.style.color = "red";
+        return false;
+    }
 
-            return false;
-        }
+    // Confirm password match
+    if (password !== confirmPassword) {
+        message.innerHTML = "Passwords do not match.";
+        message.style.color = "red";
+        return false;
+    }
+
+    // Email validation
+    if (!email.includes("@")) {
+        message.innerHTML = "Please enter a valid email address.";
+        message.style.color = "red";
+        return false;
+    }
+
+    message.innerHTML = "Registration successful!";
+    message.style.color = "green";
+
+    return false;
+}
     </script>
 </head>
 
@@ -112,7 +128,7 @@
     <form onsubmit="return validateForm()">
 
         <label>Username</label>
-        <input type="text" id="username" placeholder="Example: Inspire123">
+        <input type="text" id="username" placeholder="Example: romaine123">
         
         <br><br>
 
@@ -127,7 +143,7 @@
         <br><br>
 
         <label>Email ID</label>
-        <input type="email" id="email" placeholder="Example: Inspire123@gmail.com">
+        <input type="email" id="email" placeholder="Example: romaine123@gmail.com">
         
         <br><br>
 
