@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px gray;
+        }
+
+        h2 {
+            text-align: center;
+            color: navy;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        small {
+            color: gray;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: royalblue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        #message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script>
+        function validateForm() {
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let confirmPassword = document.getElementById("confirmPassword").value;
+            let email = document.getElementById("email").value;
+            let dob = document.getElementById("dob").value;
+
+            let message = document.getElementById("message");
+
+            // Check if fields are empty
+            if (username == "" || password == "" || confirmPassword == "" || email == "" || dob == "") {
+                message.innerHTML = "Please fill in all fields.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Password length validation
+            if (password.length < 8) {
+                message.innerHTML = "Password must contain at least 8 characters.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Password match validation
+            if (password !== confirmPassword) {
+                message.innerHTML = "Passwords do not match.";
+                message.style.color = "red";
+                return false;
+            }
+
+            // Email format validation
+            if (!email.includes("@")) {
+                message.innerHTML = "Please enter a valid email address.";
+                message.style.color = "red";
+                return false;
+            }
+
+            message.innerHTML = "Registration successful!";
+            message.style.color = "green";
+
+            return false;
+        }
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Registration Page</h2>
+
+    <form onsubmit="return validateForm()">
+
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Example: romaine123">
+        
+        <br><br>
+
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Example: SecurePass123">
+        
+        <br><br>
+
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Re-enter SecurePass123">
+        
+        <br><br>
+
+        <label>Email ID</label>
+        <input type="email" id="email" placeholder="Example: romaine123@gmail.com">
+        
+        <br><br>
+
+        <label>Date of Birth</label>
+        <input type="date" id="dob">
+        
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+    </form>
+
+    <p id="message"></p>
+
+</div>
+
+</body>
+</html>
